@@ -30,6 +30,8 @@
 #include <iomanip>
 #include <cassert>
 #include <stdint.h>
+#include <thread>
+#include <chrono>
 using namespace std;
 
 #ifdef _WIN32
@@ -298,7 +300,7 @@ static void ReflectedBinaryGrayCodeTest()
     {
         prng.Seed(0);
 
-        ::Sleep(100);
+        std::this_thread::sleep_for(std::chrono::milliseconds(100));;
 
         uint32_t t0, t1;
 
@@ -312,7 +314,7 @@ static void ReflectedBinaryGrayCodeTest()
 
         prng.Seed(0);
 
-        ::Sleep(100);
+        std::this_thread::sleep_for(std::chrono::milliseconds(100));;
 
         t0 = (uint32_t)__rdtsc();
         for (int trials = 0; trials < 10000; ++trials)
