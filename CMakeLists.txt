@@ -104,7 +104,7 @@ target_link_libraries(siamese
     Threads::Threads
 )
 #install(TARGETS siamese DESTINATION lib)
-set_target_properties(siamese PROPERTIES PUBLIC_HEADER "siamese.h;SiameseCommon.h;SiameseSerializers.h")
+set_target_properties(siamese PROPERTIES PUBLIC_HEADER "gf256.h;Logger.h;PacketAllocator.h;SiameseCommon.h;SiameseDecoder.h;SiameseEncoder.h;siamese.h;SiameseSerializers.h;SiameseTools.h")
 INSTALL(TARGETS siamese 
         LIBRARY DESTINATION lib
         PUBLIC_HEADER DESTINATION include
