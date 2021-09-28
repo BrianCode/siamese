@@ -8,6 +8,8 @@ project(siamese LANGUAGES C CXX)
 # Verbose compilation?
 #set(CMAKE_VERBOSE_MAKEFILE ON)
 
+include(CheckIncludeFileCXX)
+CHECK_INCLUDE_FILE_CXX(arm_neon.h HAVE_ARM_NEON_H)
 
 ################################################################################
 # Build Settings
@@ -77,6 +79,9 @@ set(SOURCE_FILES
     SiameseDecoder.cpp
     SiameseEncoder.cpp
     SiameseTools.cpp
+)
+set(TEST_FILES
+    ${SOURCE_FILES}
     #tests/gentab_primes.cpp
     #tests/GF256Matrix.cpp
     #tests/GF256Matrix.h
@@ -90,14 +95,28 @@ set(SOURCE_FILES
     tests/unit_test.cpp
 )
 
-
 ################################################################################
 # Targets
 
-# Application
+# library
+add_library(siamese STATIC ${SOURCE_FILES})
+target_link_libraries(siamese
+    Threads::Threads
+)
+#install(TARGETS siamese DESTINATION lib)
+set_target_properties(siamese PROPERTIES PUBLIC_HEADER "siamese.h;SiameseCommon.h;SiameseSerializers.h")
+INSTALL(TARGETS siamese 
+        LIBRARY DESTINATION lib
+        PUBLIC_HEADER DESTINATION include
+)
 
-add_executable(unit_test ${SOURCE_FILES})
+target_include_directories(siamese PUBLIC 
+    $<BUILD_INTERFACE:${PROJECT_SOURCE_DIR})
+
+# Application (unit test)
+add_executable(unit_test ${TEST_FILES})
 target_link_libraries(unit_test
     Threads::Threads
 )
 install(TARGETS unit_test DESTINATION bin)
+

@@ -258,3 +258,9 @@ lib/SiameseUnitTests.exe
 lib/SiameseUnitTests.exe
 *.exe
 lib/SiameseUnitTests.exe
+
+# custom
+.vscode
+*.cmake
+build
+output
