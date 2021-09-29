@@ -157,14 +157,14 @@ void OutputWorker::Stop()
             QueueCondition.notify_all();
         }
 
-        try
-        {
+        // try
+        // {
             if (Thread->joinable())
                 Thread->join();
-        }
-        catch (std::system_error& /*err*/)
-        {
-        }
+        // }
+        // catch (std::system_error& /*err*/)
+        // {
+        // }
     }
     Thread = nullptr;
 

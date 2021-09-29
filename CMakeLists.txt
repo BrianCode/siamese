@@ -45,6 +45,8 @@ else()
     set(CMAKE_CXX_FLAGS_RELEASE "-O3 -march=native")
 endif()
 
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fno-rtti -fno-exceptions -Os -Wall -Wextra -ffunction-sections -Wl,--gc-sections")
+
 #include_directories(include)
 
 
