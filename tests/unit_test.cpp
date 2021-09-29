@@ -29,6 +29,8 @@
 #include <vector>
 #include <string>
 #include <queue>
+#include <thread>
+#include <chrono>
 using namespace std;
 
 #include "../Logger.h"
@@ -1268,7 +1270,7 @@ void HARQSimulation::Run(unsigned seed)
             break;
         }
 
-        ::Sleep(kPacketIntervalMsec); // ms between rounds
+        std::this_thread::sleep_for(std::chrono::milliseconds(kPacketIntervalMsec)); // ms between rounds
 
         // TODO: Reordering
 
