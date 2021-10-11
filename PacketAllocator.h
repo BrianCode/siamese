@@ -479,6 +479,9 @@ class LightVector
     unsigned Allocated = kPreallocated;
 
 public:
+    ~LightVector(){
+        delete[] DataPtr;
+    }
     /// Resize the vector to the given number of elements.
     /// After this call, all elements are Uninitialized.
     /// If new size is greater than preallocated size,
