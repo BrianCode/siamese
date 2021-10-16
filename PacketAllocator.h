@@ -480,7 +480,9 @@ class LightVector
 
 public:
     ~LightVector(){
-        delete[] DataPtr;
+        if (DataPtr != &PreallocatedData[0]){
+            delete[] DataPtr;
+        }
     }
     /// Resize the vector to the given number of elements.
     /// After this call, all elements are Uninitialized.
