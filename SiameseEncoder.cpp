@@ -35,7 +35,7 @@ namespace siamese {
 #ifdef SIAMESE_ENCODER_DUMP_VERBOSE
     static logger::Channel Logger("Encoder", logger::Level::Debug);
 #else
-    static logger::Channel Logger("Encoder", logger::Level::Silent);
+    static logger::Channel Logger("Encoder", logger::Level::Error);
 #endif
 
 
