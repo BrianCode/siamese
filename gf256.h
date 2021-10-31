@@ -55,6 +55,7 @@
 
 #if defined(__ARM_NEON) && defined(__linux)
     #define LINUX_ARM
+    #define HAVE_ARM_NEON_H
 #endif // __ARM_NEON
 
 #if defined(ANDROID) || defined(IOS) || defined(LINUX_ARM) || defined(__powerpc__) || defined(__s390__)
