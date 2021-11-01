@@ -82,20 +82,23 @@ set(SOURCE_FILES
     SiameseEncoder.cpp
     SiameseTools.cpp
 )
-set(TEST_FILES
-    ${SOURCE_FILES}
-    #tests/gentab_primes.cpp
-    #tests/GF256Matrix.cpp
-    #tests/GF256Matrix.h
-    #tests/test_allocator.cpp
-    #tests/test_custom_bitset.cpp
-    #tests/test_invert_rate.cpp
-    #tests/test_recovery_sort.cpp
-    #tests/test_serializers.cpp
-    tests/TestTools.cpp
-    tests/TestTools.h
-    tests/unit_test.cpp
-)
+
+if(BUILD_TEST)
+    set(TEST_FILES
+        ${SOURCE_FILES}
+        #tests/gentab_primes.cpp
+        #tests/GF256Matrix.cpp
+        #tests/GF256Matrix.h
+        #tests/test_allocator.cpp
+        #tests/test_custom_bitset.cpp
+        #tests/test_invert_rate.cpp
+        #tests/test_recovery_sort.cpp
+        #tests/test_serializers.cpp
+        tests/TestTools.cpp
+        tests/TestTools.h
+        tests/unit_test.cpp
+    )
+endif(BUILD_TEST)
 
 ################################################################################
 # Targets
@@ -117,9 +120,16 @@ target_include_directories(siamese PUBLIC
     $<BUILD_INTERFACE:${PROJECT_SOURCE_DIR})
 
 # Application (unit test)
-add_executable(unit_test ${TEST_FILES})
-target_link_libraries(unit_test
-    Threads::Threads
-)
-install(TARGETS unit_test DESTINATION bin)
+
+if(BUILD_TEST)
+    add_executable(unit_test ${TEST_FILES})
+    enable_testing()
+    add_test(unit
+       bin/unit_test
+    )
+    target_link_libraries(unit_test
+        Threads::Threads
+    )
+    install(TARGETS unit_test DESTINATION bin)
+endif(BUILD_TEST)
 
