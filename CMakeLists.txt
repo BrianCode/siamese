@@ -109,6 +109,7 @@ target_link_libraries(siamese
 set_target_properties(siamese PROPERTIES PUBLIC_HEADER "gf256.h;Logger.h;PacketAllocator.h;SiameseCommon.h;SiameseDecoder.h;SiameseEncoder.h;siamese.h;SiameseSerializers.h;SiameseTools.h")
 INSTALL(TARGETS siamese 
         LIBRARY DESTINATION lib
+        ARCHIVE DESTINATION lib
         PUBLIC_HEADER DESTINATION include
 )
 
