@@ -564,6 +564,9 @@ public:
 
     SIAMESE_FORCE_INLINE SiameseResult IsReadyToDecode()
     {
+        if (Window.EmergencyDisabled)
+            return Siamese_Disabled;
+            
         // If there are already recovered packets to return:
         if (Window.HasRecoveredPackets || CheckRecoveryPossible())
             return Siamese_Success;
