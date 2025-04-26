@@ -663,7 +663,11 @@ extern "C" void gf256_add_mem(void * GF256_RESTRICT vx,
     {
         while (bytes >= 64)
         {
-            GF256_M128 x0 = vld1q_u8((uint8_t*) x16);
+	    // Prefetch next iteration (128 bytes ahead)
+            __builtin_prefetch((const void*)(y16 + 8), 0, 3);  // read
+            __builtin_prefetch((void*)(x16 + 256), 1, 3);        // write
+
+	    GF256_M128 x0 = vld1q_u8((uint8_t*) x16);
             GF256_M128 x1 = vld1q_u8((uint8_t*)(x16 + 1) );
             GF256_M128 x2 = vld1q_u8((uint8_t*)(x16 + 2) );
             GF256_M128 x3 = vld1q_u8((uint8_t*)(x16 + 3) );
