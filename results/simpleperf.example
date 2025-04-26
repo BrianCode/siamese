@@ -1,0 +1,2 @@
+./deploy_to_device.sh siamese_static_armv8 && adb shell "cd /data/local/tmp && simpleperf record -g --call-graph dwarf -o /data/local/tmp/siamese_callgraph.data ./siamese_static_armv8"
+adb shell "cd /data/local/tmp && simpleperf report -g callee -i siamese_callgraph.data"
